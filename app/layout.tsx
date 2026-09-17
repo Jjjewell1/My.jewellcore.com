@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import HopperStage from "../components/HopperStage";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-void">
-      <body className="bg-void text-paper antialiased">{children}</body>
+      <body className="bg-void text-paper antialiased">{children}<HopperStage /></body>
     </html>
   );
 }

@@ -225,6 +225,8 @@ export default function HopperScene() {
       document.documentElement.dataset.hopper3d = "on";
     }
 
+    const settleTimer = setTimeout(syncViews, 500);
+
     // chat widget / mascot events drive whichever view is marked primary
     const onPoseEvent = (e: Event) => {
       const detail = (e as CustomEvent).detail as string;
@@ -240,11 +242,15 @@ export default function HopperScene() {
     };
     window.addEventListener("hopper:pose", onPoseEvent);
 
-    const onResize = () => {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
-      renderer.setSize(window.innerWidth, window.innerHeight, false);
-      syncViews();
+const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
+        renderer.setSize(window.innerWidth, window.innerHeight, false);
+        syncViews();
+      }, 150);
     };
+    let resizeTimer: ReturnType<typeof setTimeout>;
     window.addEventListener("resize", onResize);
 
     // ---- framing -------------------------------------------------------------
@@ -362,6 +368,8 @@ export default function HopperScene() {
     document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
+      clearTimeout(settleTimer);
+      clearTimeout(resizeTimer);
       document.documentElement.dataset.hopper3d = "off";
       renderer.setAnimationLoop(null);
       document.removeEventListener("visibilitychange", onVisibility);
