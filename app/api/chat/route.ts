@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error:
-          "The model didn't answer — the homelab may be sleeping. Try again in a moment, or jump to the contact form.",
+          "Hopper couldn't reach the model just now. Try again in a moment, or use the contact form and JJ will reply directly.",
       },
       { status: 502 }
     );

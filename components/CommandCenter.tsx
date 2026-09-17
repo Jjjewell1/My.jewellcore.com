@@ -15,6 +15,7 @@ import {
   updateSiteSettings,
   updateLeadStatus,
 } from "@/lib/actions";
+import { PROVIDERS, resolveProvider } from "@/lib/providers";
 
 const inputCls =
   "w-full rounded-lg border-2 border-paper/15 bg-ink-soft px-3 py-2 font-body text-sm text-paper outline-none focus:border-electric";
@@ -160,6 +161,7 @@ function Field({
   type = "text",
   textarea,
   required,
+  options,
 }: {
   label: string;
   name: string;
@@ -167,6 +169,7 @@ function Field({
   type?: string;
   textarea?: boolean;
   required?: boolean;
+  options?: { value: string; label: string }[];
 }) {
   const common = {
     name,
@@ -177,7 +180,15 @@ function Field({
   return (
     <label className="flex flex-col gap-1">
       <span className={labelCls}>{label}</span>
-      {textarea ? (
+      {options ? (
+        <select {...common}>
+          {options.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      ) : textarea ? (
         <textarea rows={4} {...common} />
       ) : (
         <input type={type} {...common} />
@@ -256,16 +267,22 @@ function AiTab({ settings, tiers }: { settings: SiteSettings | null; tiers: Pric
     <>
       <Panel title="AI Integration">
         <form action={wrap(updateSiteSettings)} className="grid gap-3 sm:grid-cols-2">
-          <Field label="Provider" name="aiProvider" defaultValue={settings?.aiProvider ?? "ollama"} type="text" />
-          <Field label="Endpoint" name="aiEndpoint" defaultValue={settings?.aiEndpoint} />
+          <Field
+            label="Provider"
+            name="aiProvider"
+            defaultValue={resolveProvider(settings?.aiProvider)}
+            options={PROVIDERS.map((p) => ({ value: p.id, label: p.label }))}
+          />
           <Field label="Model" name="aiModel" defaultValue={settings?.aiModel} />
-          <Field label="API key (cloud only)" name="aiApiKey" defaultValue={settings?.aiApiKey ?? ""} type="password" />
+          <Field label="Endpoint (blank = provider default)" name="aiEndpoint" defaultValue={settings?.aiEndpoint} />
+          <Field label="API key (blank = server env var)" name="aiApiKey" defaultValue={settings?.aiApiKey ?? ""} type="password" />
           <Field label="Temperature" name="aiTemperature" type="number" defaultValue={settings?.aiTemperature ?? 0.7} />
           <p className="font-body text-xs text-paper/50 sm:col-span-2">
-            Provider: <code className="text-electric">ollama</code> |{" "}
-            <code className="text-electric">openrouter</code> | <code className="text-electric">openai-compatible</code>.
-            Ollama endpoint default <code className="text-electric">http://192.168.1.154:11434</code> (unset = default).
-            Empty AI config = local Ollama on the homelab.
+            Google Gemini is the default backend: leave the endpoint and model blank and it uses{" "}
+            <code className="text-electric">gemini-2.5-flash</code> at{" "}
+            <code className="text-electric">generativelanguage.googleapis.com</code>. Leave the API key blank to read{" "}
+            <code className="text-electric">GEMINI_API_KEY</code> from the server environment. An endpoint left over
+            from a different provider is ignored automatically.
           </p>
           <label className="flex flex-col gap-1 sm:col-span-2">
             <span className={labelCls}>System prompt (Hopper&apos;s brain — gets portfolio + pricing appended live)</span>

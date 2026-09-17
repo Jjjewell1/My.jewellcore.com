@@ -2,6 +2,7 @@ import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma-node/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import bcrypt from "bcryptjs";
+import { PROVIDER_DEFAULTS, resolveProvider } from "../lib/providers";
 
 function resolveDbUrl(url: string): string {
   if (!url.startsWith("file:")) return url;
@@ -285,7 +286,17 @@ async function main() {
   }
 
   // Wording fields are kept in sync with the seed on every run so copy updates
-  // ship with a redeploy. Operational settings are left untouched.
+  // ship with a redeploy. Operational settings are left untouched — except that a
+  // provider still on the pre-Google default gets upgraded once, so a redeploy
+  // lands on Gemini without clobbering a deliberate choice made in the UI.
+  const existing = await prisma.siteSettings.findUnique({ where: { id: "singleton" } });
+  const stillOnLegacyDefault = !existing || resolveProvider(existing.aiProvider) === "ollama";
+  const aiDefaults = {
+    aiProvider: "google",
+    aiEndpoint: PROVIDER_DEFAULTS.google.endpoint,
+    aiModel: PROVIDER_DEFAULTS.google.model,
+  };
+
   await prisma.siteSettings.upsert({
     where: { id: "singleton" },
     update: {
@@ -294,6 +305,7 @@ async function main() {
       aboutContent: ABOUT,
       journeyContent: JOURNEY,
       aiSystemPrompt: SYSTEM_PROMPT,
+      ...(stillOnLegacyDefault ? aiDefaults : {}),
     },
     create: {
       id: "singleton",
@@ -301,8 +313,8 @@ async function main() {
       tagline: "Independent web developer and systems builder.",
       aboutContent: ABOUT,
       journeyContent: JOURNEY,
-      aiEndpoint: "https://ollama.jewellcore.com",
       aiSystemPrompt: SYSTEM_PROMPT,
+      ...aiDefaults,
     },
   });
 

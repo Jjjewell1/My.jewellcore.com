@@ -38,6 +38,8 @@ RUN npm ci --omit=dev --ignore-scripts \
   && npm rebuild better-sqlite3
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
+# provider catalog is imported by prisma/seed.ts at container start
+COPY --from=builder /app/lib/providers.ts ./lib/providers.ts
 COPY --from=builder /app/src/generated ./src/generated
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static

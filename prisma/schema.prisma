@@ -57,10 +57,10 @@ model SiteSettings {
   tagline        String  @default("Builder. Tinkerer. Rabbit in a snapback.")
   contactEmail   String  @default("jj@jewellcore.com")
   ntfyTopic      String  @default("jewellcore-leads")
-  aiProvider     String  @default("ollama") // "ollama" | "openrouter" | "openai-compatible"
-  aiEndpoint     String  @default("https://ollama.jewellcore.com")
-  aiModel        String  @default("qwen2.5:7b-instruct")
-  aiApiKey       String  @default("") // only needed for cloud providers
+  aiProvider     String  @default("google") // "google" | "openrouter" | "ollama" | "openai-compatible"
+  aiEndpoint     String  @default("https://generativelanguage.googleapis.com/v1beta/openai")
+  aiModel        String  @default("gemini-2.5-flash")
+  aiApiKey       String  @default("") // optional — falls back to GEMINI_API_KEY / OPENROUTER_API_KEY / OPENAI_API_KEY
   aiTemperature  Float   @default(0.7)
   aiSystemPrompt String  @default("")
   aboutContent   String  @default("")
