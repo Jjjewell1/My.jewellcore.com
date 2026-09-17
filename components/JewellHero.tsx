@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import Hopper3D from "./Hopper3D";
+import Hopper from "./Hopper";
 
 export default function JewellHero() {
   const root = useRef<HTMLElement>(null);
@@ -137,6 +139,14 @@ export default function JewellHero() {
           °{`>`} status: nominal
         </span>
       </div>
+        {/* 3D Hopper on the right of the fold */}
+        <Hopper3D
+          view="hero"
+          pose="wave"
+          framing="hero"
+          className="pointer-events-none absolute bottom-[8%] -right-4 h-[56vh] w-[190px] md:h-[64vh] xl:block"
+          fallback={<Hopper pose="wave" className="h-40 w-28 drop-shadow-[0_0_24px_rgba(47,212,224,0.35)]" />}
+/>
     </section>
   );
 }

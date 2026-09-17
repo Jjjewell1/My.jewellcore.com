@@ -1,5 +1,6 @@
 "use client";
 
+import Hopper3D from "./Hopper3D";
 import Hopper from "./Hopper";
 
 export default function ChatSection() {
@@ -9,9 +10,13 @@ export default function ChatSection() {
     <section id="chat" data-scroll-pose="talking" className="relative overflow-hidden border-y border-white/10 bg-void-soft/40 py-24">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 [background:radial-gradient(60%_100%_at_50%_0%,rgba(47,212,224,0.08),transparent_60%)]" />
       <div className="relative mx-auto flex max-w-6xl flex-col items-center px-5 text-center">
-        <div className="pointer-events-none select-none" aria-hidden="true">
-          <Hopper pose="wave" className="h-28 w-20 drop-shadow-[0_0_18px_rgba(47,212,224,0.35)]" />
-        </div>
+        <Hopper3D
+          view="chat"
+          pose="talking"
+          framing="bust"
+          className="pointer-events-none select-none h-28 w-20 drop-shadow-[0_0_18px_rgba(47,212,224,0.35)]"
+          fallback={<Hopper pose="talking" className="h-28 w-20 drop-shadow-[0_0_18px_rgba(47,212,224,0.35)]" />}
+        />
         <h2 className="mt-4 max-w-xl font-display text-[clamp(2rem,4.5vw,3.4rem)] font-black text-paper">
           Ask <span className="text-electric text-glow-cyan">Hopper</span> first
         </h2>

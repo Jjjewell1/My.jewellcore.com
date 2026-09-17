@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Hopper3D from "./Hopper3D";
 
 gsap.registerPlugin(ScrollTrigger);
 

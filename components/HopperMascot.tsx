@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Hopper, { type HopperPose } from "./Hopper";
+import Hopper3D from "./Hopper3D";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,7 +75,14 @@ export default function HopperMascot() {
 
   return (
     <div className="pointer-events-none fixed bottom-20 right-4 z-40 hidden sm:block" aria-hidden="true">
-      <Hopper pose={pose} className="h-[120px] w-[88px] drop-shadow-lg sm:h-[150px] sm:w-[110px]" />
+      <Hopper3D
+        view="mascot"
+        pose={pose}
+        framing="full"
+        primary
+        className="h-[120px] w-[88px] sm:h-[150px] sm:w-[110px] drop-shadow-lg"
+        fallback={<Hopper pose={pose} className="h-[120px] w-[88px] sm:h-[150px] sm:w-[110px] drop-shadow-lg" />}
+      />
     </div>
   );
 }
