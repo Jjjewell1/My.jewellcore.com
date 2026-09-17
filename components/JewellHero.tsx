@@ -65,21 +65,22 @@ export default function JewellHero() {
           <div data-reveal className="glass flex w-fit items-center gap-2 rounded-full px-4 py-1.5">
             <span aria-hidden="true" className="inline-block h-2 w-2 animate-pulse rounded-full bg-electric" />
             <span className="font-mono text-[11px] font-semibold tracking-[0.28em] text-white/70">
-              OPERATIVE · JEWELLCORE · SELF-HOSTED
+              JEWELLCORE · INDEPENDENT · SELF-HOSTED
             </span>
           </div>
 
           <h1 className="mt-7 font-display text-[clamp(2.9rem,8vw,6.4rem)] font-black leading-[0.92] tracking-[-0.03em] text-paper">
             <span data-reveal className="block">Real sites.</span>
-            <span data-reveal className="block text-electric text-glow-cyan">Real homelab.</span>
+            <span data-reveal className="block text-electric text-glow-cyan">Real infrastructure.</span>
             <span data-reveal className="block">
-              Zero <span className="text-amber text-glow-amber">middlemen.</span>
+              No <span className="text-amber text-glow-amber">middlemen.</span>
             </span>
           </h1>
 
           <p data-reveal className="mt-7 max-w-md font-body text-lg text-white/80 [text-shadow:0_1px_20px_rgba(2,3,8,0.9)]">
-            I&apos;m <strong className="font-bold text-paper">JJ Jewell</strong> — built by hand, hosted at home,
-            maintained for real. A decade running my own business, now running my own servers, sites, and AI.
+            I&apos;m <strong className="font-bold text-paper">JJ Jewell</strong> — an independent web developer
+            and systems builder. Every project is designed, built, and hosted on infrastructure I own and
+            maintain myself.
           </p>
 
           <div data-reveal className="mt-9 flex flex-wrap items-center gap-4">
@@ -87,22 +88,22 @@ export default function JewellHero() {
               href="#ships"
               className="rounded-full bg-electric px-7 py-3.5 font-display text-base font-extrabold text-void shadow-[0_0_24px_-6px_rgba(47,212,224,0.7)] transition-transform hover:-translate-y-0.5"
             >
-              See the work ↓
+              View the work ↓
             </a>
             <a
               href="#contact"
               className="glass rounded-full border-white/20 px-7 py-3.5 font-display text-base font-extrabold text-paper transition-colors hover:border-electric hover:text-electric"
             >
-              Say hi
+              Get in touch
             </a>
           </div>
 
           {/* floating status chips */}
           <div data-reveal className="mt-12 flex flex-wrap gap-3 font-mono text-[11px] tracking-widest">
             {[
-              ["UPTIME", "SELF-HOSTED"],
-              ["STACK", "THREE.JS / NEXT.JS"],
-              ["BUILT BY", "HAND. OBSESSIVELY."],
+              ["HOSTING", "SELF-MANAGED"],
+              ["STACK", "NEXT.JS / THREE.JS"],
+              ["APPROACH", "DELIBERATE, BY HAND"],
             ].map(([k, v]) => (
               <span key={k} className="glass rounded-lg px-3 py-2 text-white/60">
                 <span className="text-electric">{k}</span>

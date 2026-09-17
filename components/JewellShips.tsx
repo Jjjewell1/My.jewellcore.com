@@ -42,10 +42,11 @@ export default function JewellShips({ items }: { items: PortfolioItem[] }) {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <h2 className="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-black tracking-[-0.02em] text-paper">
-              Ships I&apos;ve launched<span className="text-amber">.</span>
+              Selected work<span className="text-amber">.</span>
             </h2>
             <p className="mt-3 max-w-md font-body text-white/55">
-              Real deployments, pulled straight from the live list — what ships, stays shipped.
+              Live deployments drawn straight from the running infrastructure — if it&apos;s listed here, it&apos;s
+              online.
             </p>
           </div>
 

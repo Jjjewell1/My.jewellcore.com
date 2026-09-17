@@ -37,20 +37,20 @@ export function LoginForm() {
     const res = await login(String(fd.get("username")), String(fd.get("password")));
     setPending(false);
     if (res.ok) router.refresh();
-    else setError("Nope. Wrong combo.");
+    else setError("Incorrect username or password.");
   };
 
   return (
     <form action={act} className="w-full max-w-sm rounded-3xl border-2 border-paper/15 bg-ink-soft p-8">
       <p className="font-display text-2xl font-black text-paper">Command Center</p>
-      <p className="mt-1 font-body text-sm text-paper/60">Owner access only. This route is intentional.</p>
+      <p className="mt-1 font-body text-sm text-paper/60">Authorized access only.</p>
       <label className={labelCls + " mt-6 block"}>Username</label>
       <input name="username" required autoComplete="username" className={inputCls + " mt-1"} />
       <label className={labelCls + " mt-4 block"}>Password</label>
       <input name="password" type="password" required autoComplete="current-password" className={inputCls + " mt-1"} />
       {error && <p className="mt-3 font-body text-sm text-court">{error}</p>}
       <button type="submit" disabled={pending} className={btnPri + " mt-6 w-full text-center"}>
-        {pending ? "Checking…" : "Enter"}
+        {pending ? "Checking…" : "Sign in"}
       </button>
     </form>
   );

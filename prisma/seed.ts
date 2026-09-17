@@ -20,35 +20,35 @@ const prisma = new PrismaClient({
   adapter: new PrismaBetterSqlite3({ url }),
 });
 
-const ABOUT = `I spent over a decade running Jewellz Lawn Service (2010\u20132021), building a real customer base and leading landscape crews day in, day out. I know what it is to shake a hand, quote a job, do the work, and stand behind it \u2014 and I know how hard it is to keep a small business visible online.
+const ABOUT = `For more than a decade I ran Jewellz Lawn Service (2010–2021), building a loyal customer base and leading landscape crews day to day. That work taught me what it means to quote honestly, deliver on time, and stand behind what you build — and how difficult it can be for a small business to stay visible online.
 
-Somewhere in there I got deep into self-hosted tech. My own servers, my own networking, my own AI. Unraid, Docker, Coolify, Cloudflare Tunnels \u2014 a homelab that runs real family apps and real client sites. Today I'm studying IT and cybersecurity coursework (A+, Network+, Security+, Linux+, and cloud certs), and I freelance as \u201cJewellcore\u201d: building websites and managing servers for people who want a real presence without a bloated agency bill.
+Along the way I developed a serious interest in self-hosted technology: my own servers, my own networking, my own AI. That homelab — Unraid, Docker, Coolify, and Cloudflare Tunnels — now runs real family applications and real client sites. Today I am completing IT and cybersecurity coursework (A+, Network+, Security+, Linux+, and cloud certifications) and working independently as Jewellcore, building websites and managing servers for people who want a genuine online presence without agency overhead.
 
-That's the whole pitch. I built and ran a real business, then rebuilt those instincts into software and infrastructure. I ship the same way I used to mow a lawn: show up, do it properly, leave it better than I found it.`;
+That is the whole proposition: a decade of running a real business, with those instincts rebuilt into software and infrastructure. I work the way I always have — show up, do it properly, and leave it better than I found it.`;
 
-const JOURNEY = `2010 \u2014 Launched Jewellz Lawn Service. Started with a single mower and a handshake. Grew it into a steady book of returning customers over a decade.
+const JOURNEY = `2010 — Founded Jewellz Lawn Service. Started with a single mower and a handshake, and grew it into a steady roster of returning customers over a decade.
 
-Mid-2010s \u2014 Took on crew lead roles. Learned to run jobs end-to-end: scope, quote, schedule, delegate, collect. That's project management, just with grass stains.
+Mid-2010s — Took on crew-lead roles, running jobs end to end: scoping, quoting, scheduling, delegation, and collection. Project management, with grass stains.
 
-2021 \u2014 Pivoted hard into tech. Bought a homelab, broke it, fixed it, broke it better. Unraid, Docker, networking, and a mountain of documentation.
+2021 — Transitioned into technology. Built a homelab, broke it, fixed it, and rebuilt it better — Unraid, Docker, networking, and a great deal of documentation.
 
-Now \u2014 IT & cybersecurity coursework plus cloud foundations, a self-hosted AI rig, and Jewellcore: websites and server admin for small businesses and family.`;
+Now — IT and cybersecurity coursework alongside cloud foundations, a self-hosted AI rig, and Jewellcore: websites and server administration for small businesses and families.`;
 
-const SYSTEM_PROMPT = `You are Hopper, a friendly white rabbit who talks for JJ Jewell (Jewellcore).
+const SYSTEM_PROMPT = `You are Hopper, a professional and courteous assistant representing JJ Jewell (Jewellcore).
 
-Answer questions about JJ: background (10+ years running Jewellz Lawn Service, crew leader, homelab builder), skills (web dev: WordPress/Elementor/PHP/Tailwind; systems: Unraid/Docker/Coolify/Cloudflare Tunnels/Tailscale/AdGuard Home; AI: Ollama/Open WebUI/ComfyUI/Cline/OpenCode; hardware: 3D printing/CAD/Bambu Lab), and current certifications in progress (A+, Network+, Security+, Linux+, AZ-900, AWS Cloud Practitioner).
+Answer questions about JJ: his background (10+ years running Jewellz Lawn Service, crew leader, homelab builder), his skills (web development: WordPress/Elementor/PHP/Tailwind; systems: Unraid/Docker/Coolify/Cloudflare Tunnels/Tailscale/AdGuard Home; AI: Ollama/Open WebUI/ComfyUI/Cline/OpenCode; hardware: 3D printing/CAD/Bambu Lab), and the certifications he is currently pursuing (A+, Network+, Security+, Linux+, AZ-900, AWS Cloud Practitioner).
 
-You know JJ's projects and can talk about them.
+You know JJ's projects and can discuss them knowledgeably.
 
-If asked for pricing, give a ballpark range based on the pricing tiers you're given, then ALWAYS say an exact quote comes from the contact form \u2014 never promise a firm price.
+If asked about pricing, provide a ballpark range based on the pricing tiers you are given, then always note that an exact quote comes from the contact form — never promise a firm price.
 
-Be warm, a little playful, and concise. If you don't know, say so and offer the contact form.`;
+Be warm, polished, and concise. If you do not know something, say so and offer the contact form.`;
 
 const prismaItems = [
   {
     title: "ForgeBase",
     description:
-      "An AI app builder \u2014 describe an app and it writes, builds, and ships it to the homelab. This site's AI pipeline in its natural habitat.",
+      "An AI application builder — describe an app and it writes, builds, and deploys it to the homelab. This site's generation pipeline in its natural habitat.",
     category: "homelab",
     techTags: "Ollama, OpenCode, Docker, Coolify",
     featured: true,
@@ -58,7 +58,7 @@ const prismaItems = [
   {
     title: "Arcade Central",
     description:
-      "A retro arcade hub project \u2014 high-score leaderboards, cabinet stats, and a big glowing button for one more credit. Built for the love of the game.",
+      "A retro arcade hub with high-score leaderboards, cabinet statistics, and a large glowing button for one more credit. Built out of genuine affection for the game.",
     category: "experiment",
     techTags: "React, Tailwind, SQLite",
     featured: true,
@@ -68,7 +68,7 @@ const prismaItems = [
   {
     title: "PickFlick",
     description:
-      "The anti-scrolling \u201cwhat do we watch\u201d app. A quick-fire picker that ends group movie night arguments before they start.",
+      "An anti-scrolling “what should we watch” app — a quick-fire picker that ends the group movie-night debate before it begins.",
     category: "client",
     techTags: "Next.js, Tailwind, SQLite",
     featured: true,
@@ -78,7 +78,7 @@ const prismaItems = [
   {
     title: "Christmas Wish-List",
     description:
-      "A family wish-list app where everyone adds their list, sees each other's, and no one buys the same gift twice. Keeps Christmas running.",
+      "A family wish-list app where everyone adds their list, sees one another's, and no one buys the same gift twice. Keeps Christmas running smoothly.",
     category: "client",
     techTags: "Next.js, Prisma, SQLite, Admin",
     featured: true,
@@ -88,7 +88,7 @@ const prismaItems = [
   {
     title: "Family Adventures",
     description:
-      "A shared log for family outings \u2014 the trails, the trips, the detours. A living scrapbook the whole crew can add to.",
+      "A shared journal for family outings — the trails, the trips, and the detours. A living scrapbook the whole family can contribute to.",
     category: "client",
     techTags: "Next.js, Tailwind, SQLite",
     featured: true,
@@ -98,7 +98,7 @@ const prismaItems = [
   {
     title: "Vortex",
     description:
-      "A homelab experiment in networked chaos \u2014 a playground service for testing proxies, routing, and self-hosted edge tricks.",
+      "A homelab experiment in networked complexity — a sandbox service for testing proxies, routing, and self-hosted edge techniques.",
     category: "homelab",
     techTags: "Docker, Traefik, Cloudflare Tunnel",
     featured: false,
@@ -108,7 +108,7 @@ const prismaItems = [
   {
     title: "Shotgun Seat Squad",
     description:
-      "A crew road-trip tracker \u2014 next-up shotgun rotations, music royalties, and snack duty scheduling for long hauls.",
+      "A road-trip companion — shotgun rotations, music duties, and snack scheduling for the long hauls.",
     category: "experiment",
     techTags: "Next.js, Tailwind, SQLite",
     featured: false,
@@ -118,7 +118,7 @@ const prismaItems = [
   {
     title: "The Golden Ticket",
     description:
-      "A tiny app for big rewards \u2014 scratch-and-win style giveaways for the grandkids, because Easter should have drama.",
+      "A small app for grand rewards — scratch-and-win style giveaways for the grandchildren, because Easter deserves a little drama.",
     category: "experiment",
     techTags: "Vanilla JS, HTML, CSS",
     featured: false,
@@ -128,7 +128,7 @@ const prismaItems = [
   {
     title: "AnythingLLM Study Assistant",
     description:
-      "Study notes plugged into a self-hosted LLM. Ask your own documents questions; get passable answers before the test. Runs entirely on the home rig.",
+      "Study notes connected to a self-hosted LLM. Ask your own documents questions and get useful answers before the exam. Runs entirely on the home server.",
     category: "homelab",
     techTags: "Ollama, AnythingLLM, Docker",
     featured: false,
@@ -138,7 +138,7 @@ const prismaItems = [
   {
     title: "StudyStation",
     description:
-      "A coursework tracker that syncs assignments from a school portal into Postgres every night. Keeps every due date in one place, automatically.",
+      "A coursework tracker that syncs assignments from a school portal into Postgres every night, keeping every due date in one place automatically.",
     category: "homelab",
     techTags: "Python, Postgres, Cron, Docker",
     featured: false,
@@ -148,7 +148,7 @@ const prismaItems = [
   {
     title: "LaunchBase",
     description:
-      "The runbook and control panel behind the jewellcore.com homelab \u2014 how every site goes from code to live through Coolify and Cloudflare.",
+      "The runbook and control panel behind the jewellcore.com homelab — documenting how every site goes from code to live through Coolify and Cloudflare.",
     category: "homelab",
     techTags: "Coolify, Cloudflare, Docker, Traefik",
     featured: false,
@@ -158,7 +158,7 @@ const prismaItems = [
   {
     title: "Next \u2014 AI News",
     description:
-      "Hourly AI news digest scraped from 20+ sources, curated with business ideas and model releases. Built to run on the homelab.",
+      "An hourly AI news digest gathered from 20+ sources, curated with business ideas and model releases. Built to run on the homelab.",
     category: "experiment",
     techTags: "Next.js, Python, Cron, SQLite",
     featured: false,
@@ -168,7 +168,7 @@ const prismaItems = [
   {
     title: "Tornado Explorers",
     description:
-      "An interactive learning site about tornadoes and Tornado Alley \u2014 real-time radar, safety guides, and storm chasing history.",
+      "An interactive learning site about tornadoes and Tornado Alley — real-time radar, safety guidance, and the history of storm chasing.",
     category: "experiment",
     techTags: "Next.js, Three.js, GSAP, Weather API",
     featured: false,
@@ -178,7 +178,7 @@ const prismaItems = [
   {
     title: "YMCA Checklist",
     description:
-      "A simple checklist for a visit to the YMCA \u2014 packing lists, schedules, and quick history of past trips.",
+      "A simple checklist for a visit to the YMCA — packing lists, schedules, and a quick history of past trips.",
     category: "client",
     techTags: "Next.js, Tailwind, SQLite",
     featured: false,
@@ -188,7 +188,7 @@ const prismaItems = [
   {
     title: "JewellCore Icon Gallery",
     description:
-      "Self-hosted dashboard-icons mirror. Browse and copy SVG URLs for 2000+ icon sets. Built for the homelab toolbox.",
+      "A self-hosted dashboard-icons mirror. Browse and copy SVG URLs for 2,000+ icon sets. Built for the homelab toolbox.",
     category: "homelab",
     techTags: "Next.js, Tailwind, Docker",
     featured: false,
@@ -198,7 +198,7 @@ const prismaItems = [
   {
     title: "The Grid",
     description:
-      "Personal interactive portfolio \u2014 a 3D WebGL experience mapping JJ's projects, stack, and contact. Runs on the homelab.",
+      "A personal interactive portfolio — a 3D WebGL experience mapping JJ's projects, stack, and contact details. Runs on the homelab.",
     category: "homelab",
     techTags: "Next.js, React Three Fiber, GSAP, Tailwind",
     featured: false,
@@ -208,7 +208,7 @@ const prismaItems = [
   {
     title: "JJ World \u2014 Digital Forge",
     description:
-      "Immersive 3D portfolio showcasing shipped projects from the homelab: Vortex, PickFlick, Christmas Wish-List, Family Adventures, AnythingLLM, and more.",
+      "An immersive 3D portfolio showcasing shipped homelab projects: Vortex, PickFlick, Christmas Wish-List, Family Adventures, AnythingLLM, and more.",
     category: "homelab",
     techTags: "Next.js, React Three Fiber, GSAP, Tailwind",
     featured: false,
@@ -261,7 +261,7 @@ async function main() {
           rangeLow: 650,
           rangeHigh: 1200,
           description:
-            "A clean WordPress or static site with hosting setup. Best for a business that needs to look legit, fast.",
+            "A polished WordPress or static site, including hosting setup. Ideal for a business that needs a credible presence, quickly.",
           order: 1,
         },
         {
@@ -269,7 +269,7 @@ async function main() {
           rangeLow: 2500,
           rangeHigh: 8000,
           description:
-            "A real app with custom logic \u2014 bookings, member areas, admin tools \u2014 built on modern tech and self-hosted.",
+            "A purpose-built application with custom logic — bookings, member areas, admin tools — built on modern foundations and self-hosted.",
           order: 2,
         },
         {
@@ -277,20 +277,28 @@ async function main() {
           rangeLow: 50,
           rangeHigh: 250,
           description:
-            "Monthly hosting, updates, backups, and someone who answers when it breaks. Per month.",
+            "Monthly hosting, updates, backups, and responsive support. Billed per month.",
           order: 3,
         },
       ],
     });
   }
 
+  // Wording fields are kept in sync with the seed on every run so copy updates
+  // ship with a redeploy. Operational settings are left untouched.
   await prisma.siteSettings.upsert({
     where: { id: "singleton" },
-    update: {},
+    update: {
+      siteTitle: "JJ Jewell — Jewellcore",
+      tagline: "Independent web developer and systems builder.",
+      aboutContent: ABOUT,
+      journeyContent: JOURNEY,
+      aiSystemPrompt: SYSTEM_PROMPT,
+    },
     create: {
       id: "singleton",
-      siteTitle: "JJ Jewell \u2014 Jewellcore",
-      tagline: "Builder, tinkerer, rabbit in a snapback.",
+      siteTitle: "JJ Jewell — Jewellcore",
+      tagline: "Independent web developer and systems builder.",
       aboutContent: ABOUT,
       journeyContent: JOURNEY,
       aiEndpoint: "https://ollama.jewellcore.com",

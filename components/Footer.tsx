@@ -49,7 +49,7 @@ export default function FooterClient({ links }: { links: { platform: string; url
               JEWELLCORE<span className="text-electric">®</span>
             </p>
             <p className="mt-1 font-body text-sm text-white/50">
-              Websites, hosting, and homelab-admin that actually ship.
+              Websites, hosting, and infrastructure — designed, built, and maintained in-house.
             </p>
           </div>
 
@@ -79,7 +79,7 @@ export default function FooterClient({ links }: { links: { platform: string; url
             <PawMark />
           </button>
           <p className="font-body text-xs text-white/40">
-            © {new Date().getFullYear()} JJ Jewell · built + hosted at home
+            © {new Date().getFullYear()} JJ Jewell · Built and hosted in-house
           </p>
         </div>
       </div>

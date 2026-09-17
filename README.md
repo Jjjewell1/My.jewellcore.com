@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JJ Jewell — Jewellcore
 
-## Getting Started
+The personal portfolio and services site for **JJ Jewell (Jewellcore)** — an independent web
+developer and systems builder. A Next.js application with a real-time 3D scene, a self-hosted AI
+assistant, and a private admin console, deployed as a Docker image behind Cloudflare Tunnel.
 
-First, run the development server:
+Live: **https://jjs.jewellcore.com**
+
+## Features
+
+- **Marketing site** — hero, positioning, capabilities, selected work, and a contact form.
+- **Selected work** — portfolio entries are read from the database, so the grid always reflects
+  the live project list.
+- **Hopper** — an AI assistant grounded in the live portfolio and pricing data. Answers are drawn
+  from the database, so they never go stale. Supports Ollama (self-hosted) and any OpenAI-compatible
+  endpoint.
+- **Lead capture** — contact submissions and chat conversations are stored and pushed in real time
+  via [ntfy](https://ntfy.sh).
+- **Command Center** — a password-protected console at `/command-center` for managing portfolio
+  items, pricing tiers, about/journey content, social links, AI configuration, and leads.
+- **3D scene** — a Three.js / GSAP background that reacts to scroll.
+
+## Tech stack
+
+| Layer | Technology |
+| --- | --- |
+| Framework | Next.js 14 (App Router, standalone output) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Data | Prisma 7 + SQLite (`@prisma/adapter-better-sqlite3`) |
+| Motion | Three.js, GSAP / ScrollTrigger |
+| AI | Ollama or OpenAI-compatible API |
+| Runtime | Docker (multi-stage), Coolify, Cloudflare Tunnel |
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env        # then fill in the values
+npx prisma generate
+npx prisma db push
+npx tsx prisma/seed.ts
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app is served at http://localhost:3000, and the admin console at
+http://localhost:3000/command-center.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See `.env.example`. Key values:
 
-## Learn More
+| Variable | Purpose |
+| --- | --- |
+| `DATABASE_URL` | SQLite connection string, e.g. `file:/app/data/jewellcore.db` |
+| `SESSION_SECRET` | Signing key for admin sessions |
+| `ADMIN_PASSWORD` | Initial password for the admin user (seeded once) |
+| `FORCE_ADMIN_RESET` | Set to `true` to reset the admin password from `ADMIN_PASSWORD` on next seed |
+| `NTFY_TOPIC_URL` | ntfy topic URL for lead notifications |
+| `NTFY_ACCESS_TOKEN` | ntfy access token |
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Production build |
+| `npm run start` | Start the production server |
+| `npm run lint` | Run ESLint |
+| `npm run db:push` | Push the Prisma schema to the database |
+| `npm run db:seed` | Seed reference content and the admin user |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+The site runs as a Docker image. `start.sh` aligns the database schema and seeds reference content
+on boot, then starts the standalone Next.js server. In production it is deployed through Coolify and
+published via Cloudflare Tunnel.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker build -t jewellcore:latest .
+docker run --rm -p 3000:3000 \
+  -e DATABASE_URL=file:/app/data/jewellcore.db \
+  -e SESSION_SECRET=change-me \
+  -e ADMIN_PASSWORD=change-me \
+  jewellcore:latest
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+All rights reserved. This is a personal site; the content and design are not licensed for reuse.

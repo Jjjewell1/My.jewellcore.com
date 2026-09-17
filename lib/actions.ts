@@ -55,7 +55,7 @@ export async function submitContact(formData: FormData) {
   const projectType = String(formData.get("projectType") || "").trim() || null;
   const message = String(formData.get("message") || "").trim();
 
-  if (!name || !email || !message) return { ok: false, error: "Please fill all required fields." };
+  if (!name || !email || !message) return { ok: false, error: "Please complete all required fields." };
 
   const prisma = await getPrisma();
   await prisma.lead.create({ data: { name, email, projectType, message, source: "contact_form" } });

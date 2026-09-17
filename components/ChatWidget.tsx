@@ -8,7 +8,7 @@ interface Msg {
   content: string;
 }
 
-const CHIPS = ["What do you charge?", "What have you built?", "Can you host my site?", "Which certs are you working on?"];
+const CHIPS = ["What are your rates?", "What have you built?", "Can you host my site?", "Which certifications are in progress?"];
 
 const EMAIL_RE = /[\w.+-]+@[\w-]+\.[\w.-]+/i;
 const NAME_RE = /(?:my name is|i'?m|call me)\s+([A-Z][\w-]+(?:\s+[A-Z][\w-]+)?)/i;
@@ -69,12 +69,12 @@ export default function ChatWidget() {
       });
       const json = await res.json();
       if (!res.ok) {
-        setMessages((m) => [...m, { role: "assistant", content: json.error || "Something went sideways." }]);
+        setMessages((m) => [...m, { role: "assistant", content: json.error || "Something went wrong." }]);
       } else {
         setMessages((m) => [...m, { role: "assistant", content: json.reply }]);
       }
     } catch {
-      setMessages((m) => [...m, { role: "assistant", content: "Couldn't reach the homelab. Try the contact form instead." }]);
+      setMessages((m) => [...m, { role: "assistant", content: "I couldn't reach the server. Please try the contact form instead." }]);
     } finally {
       setBusy(false);
     }
@@ -92,7 +92,7 @@ export default function ChatWidget() {
       setCapture(null);
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: "Thanks — I saved your info. JJ will get back to you (and I'll drop the notification in real time)." },
+        { role: "assistant", content: "Thank you — your details have been saved. JJ will be in touch shortly." },
       ]);
     }
   };
@@ -107,7 +107,7 @@ export default function ChatWidget() {
             </div>
             <div>
               <p className="font-display text-base font-extrabold text-paper">Hopper</p>
-              <p className="font-body text-xs text-white/60">{busy ? "thinking…" : "ask me anything about JJ"}</p>
+              <p className="font-body text-xs text-white/60">{busy ? "thinking…" : "Ask me anything about JJ"}</p>
             </div>
             <button onClick={() => setOpen(false)} aria-label="Close chat" className="ml-auto grid h-8 w-8 place-items-center rounded-full bg-white/10 font-body text-paper hover:bg-white/20">
               ✕
@@ -118,7 +118,8 @@ export default function ChatWidget() {
             {messages.length === 0 && (
               <>
                 <p className="font-body text-sm text-white/75">
-                  Hey, I&apos;m Hopper 👋 — I run the bullpen for JJ. Ask about projects, pricing, hosting, or certs.
+                  Hello, I&apos;m Hopper — JJ&apos;s assistant. Ask about projects, pricing, hosting, or
+                  certifications.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {CHIPS.map((c) => (
@@ -150,7 +151,7 @@ export default function ChatWidget() {
             {capture && !saved && (
               <div className="rounded-2xl border border-grape/60 bg-grape/15 px-3.5 py-2.5">
                 <p className="font-body text-xs text-white/80">
-                  Want me to save <strong className="text-grape">{capture.email}</strong> as a lead so JJ can follow up?
+                  Would you like me to save <strong className="text-grape">{capture.email}</strong> so JJ can follow up?
                 </p>
                 <button onClick={saveLead} className="mt-2 rounded-full bg-grape px-4 py-1.5 font-body text-xs font-bold text-paper">
                   Yes, save it

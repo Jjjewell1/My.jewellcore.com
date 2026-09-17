@@ -27,11 +27,12 @@ export default function JewellContact() {
               Let&apos;s build something<span className="text-electric">.</span>
             </h2>
             <p className="mt-4 max-w-md font-body text-white/60">
-              A quick note, a real quote, no commitment. Every project starts with a conversation, not a deposit.
+              A brief note is all it takes. Every engagement starts with a conversation — no commitment, no
+              deposit.
             </p>
             <div className="glass mt-8 rounded-2xl p-6">
               <p className="font-display text-xl font-extrabold text-electric">jj@jewellcore.com</p>
-              <p className="mt-1 font-body text-sm text-white/50">Weeknights and weekends.</p>
+              <p className="mt-1 font-body text-sm text-white/50">Evenings and weekends.</p>
             </div>
           </div>
 
@@ -49,15 +50,15 @@ export default function JewellContact() {
             <label className="flex flex-col gap-1.5">
               <span className="font-display text-sm font-bold text-white/80">Project type</span>
               <select name="projectType" className="glass rounded-xl border-white/15 px-4 py-3 font-body text-sm text-paper outline-none focus:border-electric">
-                <option value="">Choose one (optional)</option>
+                <option value="">Select one (optional)</option>
                 <option value="website">Website / landing page</option>
-                <option value="web_app">Custom web app</option>
+                <option value="web_app">Custom web application</option>
                 <option value="hosting">Hosting / management</option>
                 <option value="other">Something else</option>
               </select>
             </label>
             <label className="flex flex-col gap-1.5">
-              <span className="font-display text-sm font-bold text-white/80">Tell me about it *</span>
+              <span className="font-display text-sm font-bold text-white/80">Project details *</span>
               <textarea name="message" rows={4} required className="glass rounded-xl border-white/15 px-4 py-3 font-body text-sm text-paper outline-none placeholder:text-white/30 focus:border-electric" />
             </label>
 
@@ -66,7 +67,7 @@ export default function JewellContact() {
               disabled={pending}
               className="w-full rounded-full bg-electric px-6 py-3 font-display text-base font-extrabold text-void shadow-[0_0_24px_-6px_rgba(47,212,224,0.7)] transition-transform hover:-translate-y-0.5 disabled:opacity-60"
             >
-              {pending ? "Sending…" : "Send it"}
+              {pending ? "Sending…" : "Send message"}
             </button>
 
             {state && !state.ok && state.error && (
@@ -74,7 +75,7 @@ export default function JewellContact() {
             )}
             {state && state.ok && (
               <p className="font-body text-sm font-bold text-electric">
-                Thanks — got it. I&apos;ll get back to you soon.
+                Thank you — your message has been received. I&apos;ll be in touch shortly.
               </p>
             )}
           </form>

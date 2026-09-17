@@ -7,9 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS: { value: string; label: string; sub: string; accent: string }[] = [
-  { value: "10+", label: "YEARS RUNNING A REAL BUSINESS", sub: "served clients, not clicks", accent: "text-electric" },
-  { value: "1", label: "HOMELAB, FULLY SELF-HOSTED", sub: "the rack behind every ship", accent: "text-amber" },
-  { value: "100%", label: "HAND-BUILT & HAND-MAINTAINED", sub: "no middlemen, no boilerplate", accent: "text-paper" },
+  { value: "10+", label: "YEARS RUNNING A REAL BUSINESS", sub: "a decade of clients served", accent: "text-electric" },
+  { value: "1", label: "HOMELAB, FULLY SELF-HOSTED", sub: "the servers behind every project", accent: "text-amber" },
+  { value: "100%", label: "BUILT AND MAINTAINED BY HAND", sub: "no middlemen, no boilerplate", accent: "text-paper" },
 ];
 
 export default function JewellPitch() {
@@ -58,9 +58,9 @@ export default function JewellPitch() {
       <div className="mx-auto max-w-6xl px-5">
         <div data-sweep>
           <p className="max-w-3xl font-display text-[clamp(1.8rem,4.2vw,3.4rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-paper">
-            No template mill. No white-label reseller.{" "}
-            <span className="text-electric text-glow-cyan">One builder</span>, one stack, one rack in the house —
-            sites built by hand and hosted where the owner can still touch the metal.
+            No template mills. No white-label resellers.{" "}
+            <span className="text-electric text-glow-cyan">One developer</span>, one stack, one rack — every site
+            built by hand and hosted on infrastructure I manage directly.
           </p>
         </div>
 

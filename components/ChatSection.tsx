@@ -16,8 +16,8 @@ export default function ChatSection() {
           Ask <span className="text-electric text-glow-cyan">Hopper</span> first
         </h2>
         <p className="mt-3 max-w-md font-body text-white/60">
-          The rabbit knows the projects, the pricing ranges, and which certs are in the oven. It answers from
-          the live project list — so it never goes stale.
+          Hopper knows the portfolio, the pricing ranges, and the certifications in progress. Answers are drawn
+          from the live project list, so they never go stale.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <button
@@ -30,7 +30,7 @@ export default function ChatSection() {
             onClick={open}
             className="glass rounded-full border-white/20 px-6 py-3 font-display text-base font-extrabold text-paper transition-colors hover:border-electric hover:text-electric"
           >
-            How much does a site cost?
+            What does a site cost?
           </button>
         </div>
       </div>

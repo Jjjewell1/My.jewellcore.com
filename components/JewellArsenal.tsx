@@ -10,7 +10,7 @@ const GROUPS: { index: string; title: string; blurb: string; accent: string; chi
   {
     index: "01",
     title: "Web Dev",
-    blurb: "Custom sites that ship — framework or CMS, whichever fits the client.",
+    blurb: "Custom, accessible websites built on the framework or CMS that best fits the project.",
     accent: "text-electric",
     chip: "bg-electric text-void",
     items: ["Next.js", "Tailwind", "PHP", "WordPress"],
@@ -18,7 +18,7 @@ const GROUPS: { index: string; title: string; blurb: string; accent: string; chi
   {
     index: "02",
     title: "Systems",
-    blurb: "The rack that runs it: containers to Cloudflare, all the way public.",
+    blurb: "The infrastructure behind it — from containers to the public edge, fully self-managed.",
     accent: "text-amber",
     chip: "bg-amber text-void",
     items: ["Unraid", "Docker", "Coolify", "Cloudflare Tunnels"],
@@ -26,7 +26,7 @@ const GROUPS: { index: string; title: string; blurb: string; accent: string; chi
   {
     index: "03",
     title: "AI Ops",
-    blurb: "Local models wired into real workflows — no cloud dependency unless I choose one.",
+    blurb: "Local models integrated into real workflows, with no cloud dependency unless I choose one.",
     accent: "text-electric",
     chip: "bg-electric text-void",
     items: ["Ollama", "Open WebUI", "OpenCode", "ComfyUI"],
@@ -34,7 +34,7 @@ const GROUPS: { index: string; title: string; blurb: string; accent: string; chi
   {
     index: "04",
     title: "Hardware",
-    blurb: "If I can hold it or print it, I probably do — CAD to filament to a humming server.",
+    blurb: "Physical work, kept practical — from CAD and 3D printing to the machines that run it all.",
     accent: "text-amber",
     chip: "bg-amber text-void",
     items: ["3D Printing", "CAD", "Bambu Lab", "Pi"],
@@ -78,10 +78,10 @@ export default function JewellArsenal() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <h2 className="max-w-lg font-display text-[clamp(2rem,4.5vw,3.4rem)] font-black tracking-[-0.02em] text-paper">
-            The arsenal<span className="text-electric">.</span>
+            The toolkit<span className="text-electric">.</span>
           </h2>
           <p className="max-w-sm font-body text-white/55">
-            Floating nodes around one core — the stack I actually reach for, grouped by job.
+            A single core, several disciplines — the tools I rely on daily, grouped by craft.
           </p>
         </div>
 
