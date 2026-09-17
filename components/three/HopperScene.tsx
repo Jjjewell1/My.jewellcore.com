@@ -81,18 +81,14 @@ export default function HopperScene() {
     }
 
     let disposed = false;
-    let renderer: THREE.WebGLRenderer;
-    let scene: THREE.Scene;
-    let camera: THREE.PerspectiveCamera;
-    let clock: THREE.Clock;
     const assets = createHopperAssets();
+    const scene: THREE.Scene = new THREE.Scene();
+    const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(30, 1, 0.1, 120);
+    const clock: THREE.Clock = new THREE.Clock();
     let env: THREE.Texture | null = null;
     const views: View[] = [];
-    let ground: THREE.Mesh;
-    let keyLight: THREE.DirectionalLight;
-    let rimCyan: THREE.PointLight;
-    let rimMagenta: THREE.PointLight;
-    let ambient: THREE.AmbientLight;
+
+    let renderer: THREE.WebGLRenderer;
 
     try {
       renderer = new THREE.WebGLRenderer({
@@ -132,18 +128,15 @@ export default function HopperScene() {
     renderer.domElement.style.pointerEvents = "none";
     mount.appendChild(renderer.domElement);
 
-    scene = new THREE.Scene();
     env = createNeonEnvironment(renderer);
     scene.environment = env;
 
-    camera = new THREE.PerspectiveCamera(30, 1, 0.1, 120);
-    clock = new THREE.Clock();
 
     // ---- lighting ------------------------------------------------------------
-    ambient = new THREE.AmbientLight(0x2b3452, 1.05);
+    const ambient = new THREE.AmbientLight(0x2b3452, 1.05);
     scene.add(ambient);
 
-    keyLight = new THREE.DirectionalLight(0xffffff, 2.7);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.7);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.set(1024, 1024);
     keyLight.shadow.bias = -0.0012;
@@ -158,13 +151,13 @@ export default function HopperScene() {
     scene.add(keyLight);
     scene.add(keyLight.target);
 
-    rimCyan = new THREE.PointLight(HOPPER_CYAN, 30, 14, 2);
-    rimMagenta = new THREE.PointLight(HOPPER_MAGENTA, 26, 14, 2);
+    const rimCyan = new THREE.PointLight(HOPPER_CYAN, 30, 14, 2);
+    const rimMagenta = new THREE.PointLight(HOPPER_MAGENTA, 26, 14, 2);
     scene.add(rimCyan, rimMagenta);
 
     // ---- contact shadow only: the plane itself stays invisible --------------
     const shadowMat = new THREE.ShadowMaterial({ opacity: 0.42 });
-    ground = new THREE.Mesh(new THREE.PlaneGeometry(7, 7), shadowMat);
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(7, 7), shadowMat);
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = 0.002;
     ground.receiveShadow = true;
