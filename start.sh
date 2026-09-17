@@ -5,5 +5,5 @@ set -e
 #    create the admin user from ADMIN_PASSWORD on first boot.
 # 3) Start the app.
 npx prisma db push --accept-data-loss
-node prisma/seed.mjs
+npx tsx prisma/seed.ts
 exec node server.js

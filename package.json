@@ -11,7 +11,7 @@
     "db:seed": "prisma db seed"
   },
   "prisma": {
-    "seed": "node prisma/seed.mjs"
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.15.1",

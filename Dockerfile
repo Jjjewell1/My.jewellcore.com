@@ -1,10 +1,13 @@
 FROM node:20-bookworm-slim AS builder
 WORKDIR /app
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends python3 make g++ \
+  && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
-COPY prisma ./prisma
-RUN npx prisma generate
 COPY . .
+RUN npx prisma generate
+RUN npm rebuild better-sqlite3
 
 # Prerender targets a seeded SQLite DB (same flow as local builds against dev.db).
 ARG DATABASE_URL=file:./dev.db
@@ -19,19 +22,23 @@ ENV DATABASE_URL=$DATABASE_URL \
     FORCE_ADMIN_RESET=$FORCE_ADMIN_RESET \
     NTFY_TOPIC_URL=$NTFY_TOPIC_URL \
     NTFY_ACCESS_TOKEN=$NTFY_ACCESS_TOKEN
-RUN mkdir -p /app/data && npx prisma db push --accept-data-loss && node prisma/seed.mjs
+RUN mkdir -p /app/data && npx prisma db push --accept-data-loss && npx tsx prisma/seed.ts
 RUN npm run build
 
 FROM node:20-bookworm-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends ca-certificates \
+  && apt-get install -y --no-install-recommends ca-certificates python3 make g++ \
   && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --ignore-scripts \
-  && npm install prisma@6 --omit=dev --ignore-scripts
+  && npm install prisma@7 --omit=dev --ignore-scripts \
+  && npm install tsx --omit=dev --ignore-scripts \
+  && npm rebuild better-sqlite3
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
+COPY --from=builder /app/src/generated ./src/generated
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public

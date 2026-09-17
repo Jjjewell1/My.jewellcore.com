@@ -1,6 +1,5 @@
 import { PrismaClient } from "../src/generated/prisma-node/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { resolve } from "node:path";
 import type { D1Database } from "@cloudflare/workers-types";
 
 const globalForPrisma = globalThis as unknown as {
@@ -12,12 +11,18 @@ const globalForPrisma = globalThis as unknown as {
  * against the schema directory (prisma/). better-sqlite3 resolves them
  * against the process CWD, so re-apply the historical behavior to keep the
  * dev.db location identical for both local dev and the Coolify deployment.
+ *
+ * Absolute file: URLs are left unchanged so the SQLite adapter and Prisma CLI
+ * both open the same file. Relative "file:" URLs are also left unchanged so
+ * that Prisma CLI's relative resolution (CWD‑based) matches better-sqlite3's
+ * CWD‑based opening.
  */
 function resolveDbUrl(url: string): string {
   if (!url.startsWith("file:")) return url;
-  const filePath = url.slice("file:".length).replace(/^\/+/, "");
-  if (filePath === ":memory:" || filePath === "") return url;
-  return `file:${resolve(process.cwd(), "prisma", filePath)}`;
+  const rest = url.substring("file:".length);
+  if (rest === ":memory:" || rest === "") return url;
+  if (rest.startsWith("/")) return url;
+  return url;
 }
 
 /* ------------------------------------------------------------------ */

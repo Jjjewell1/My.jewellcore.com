@@ -1,12 +1,20 @@
 import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma-node/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { resolve } from "node:path";
 import bcrypt from "bcryptjs";
 
-const url = typeof process.env.DATABASE_URL === "string" && process.env.DATABASE_URL.startsWith("file:")
-  ? `file:${resolve(process.cwd(), "prisma", process.env.DATABASE_URL.slice("file:".length).replace(/^\/+/, ""))}`
-  : (process.env.DATABASE_URL ?? "file:./prisma/dev.db");
+function resolveDbUrl(url: string): string {
+  if (!url.startsWith("file:")) return url;
+  const rest = url.slice(5);
+  if (rest === ":memory:" || rest === "") return url;
+  if (rest.startsWith("/")) return url;
+  return url;
+}
+
+const url =
+  typeof process.env.DATABASE_URL === "string"
+    ? resolveDbUrl(process.env.DATABASE_URL)
+    : "file:./prisma/dev.db";
 
 const prisma = new PrismaClient({
   adapter: new PrismaBetterSqlite3({ url }),
